@@ -1,0 +1,1 @@
+# Exercici 2 Xat a Dos :3
