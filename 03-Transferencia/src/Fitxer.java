@@ -1,8 +1,8 @@
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 
 public class Fitxer {
+    
     private String nom;
     private byte[] contingut;
 
@@ -13,19 +13,18 @@ public class Fitxer {
     public byte[] getContingut() {
 
         File file = new File(nom);
-
-        if (!file.exists()) {
-            System.out.println("El fitxer no existeix.");
+        
+        if (!file.exists() || !file.isFile()) {
+            System.out.println("Error llegint el fitxer del client: " + nom);
             return null;
         }
 
-        try {
+        try {    
             contingut = Files.readAllBytes(file.toPath());
-        } catch (IOException e) {
+            return contingut;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return contingut;
-        
     }
 }
