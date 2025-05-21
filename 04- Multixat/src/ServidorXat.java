@@ -64,4 +64,22 @@ public class ServidorXat {
         }
     }
 
+    public static void main(String[] args) throws Exception {
+        ServidorXat servidor = new ServidorXat();
+
+        servidor.socket = new ServerSocket(ServidorXat.PORT);
+        System.out.println("Servidor iniciat a " + ServidorXat.HOST + ":" + ServidorXat.PORT);
+
+        while (!servidor.sortir) {
+            Socket socketClient = servidor.socket.accept();
+            System.out.println("Client connectat: " + socketClient.getInetAddress());
+
+            GestorClients gestor = new GestorClients(socketClient, servidor);
+            gestor.start();
+        }
+
+        servidor.pararServidor();
+
+    }
+
 }
